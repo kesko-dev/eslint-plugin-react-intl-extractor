@@ -1,7 +1,9 @@
 import rule from './rule';
 
-export default {
+const rules = {
   rules: {
     'message-collector': rule
   }
 };
+
+export = rules;
