@@ -8,6 +8,7 @@ const collector = new ReactIntlCollector_1.default();
 process.on('exit', () => {
     collector.flush();
 });
+;
 exports.default = {
     create: (context) => {
         if (context.options.length > 0) {
@@ -26,7 +27,8 @@ exports.default = {
                         const id = node.attributes.find(tag => tag.name.name == 'id');
                         const defaultMessage = node.attributes.find(tag => tag.name.name == 'defaultMessage');
                         if (id && defaultMessage) {
-                            if (!collector.collectTranslationPair(id.value.value, defaultMessage.value.value)) {
+                            if (!collector.collectTranslationPair(id.value.value, defaultMessage.value.value ||
+                                defaultMessage.value.expression.quasis[0].value.raw)) {
                                 context.report({
                                     node: node,
                                     message: 'Duplicate translation id {{id}} with different defaultMessage',

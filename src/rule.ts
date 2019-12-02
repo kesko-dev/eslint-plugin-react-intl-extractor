@@ -12,8 +12,22 @@ process.on('exit', () => {
 interface JSXOpeningElement {
   type: 'JSXOpeningElement';
   name: { name: string };
-  attributes: { name: { name: string }; value: { value: string } }[];
-}
+  attributes: {
+    name: {
+      name: string
+    }
+    value: {
+      value: string,
+      expression: {
+        quasis: {
+          value: {
+            raw: string
+          }
+        }[]
+      }
+    }
+  } []
+};
 
 export default {
   create: (context: Rule.RuleContext) => {
@@ -38,7 +52,8 @@ export default {
               if (
                 !collector.collectTranslationPair(
                   id.value.value,
-                  defaultMessage.value.value
+                  defaultMessage.value.value ||
+                  defaultMessage.value.expression.quasis[0].value.raw
                 )
               ) {
                 context.report({
