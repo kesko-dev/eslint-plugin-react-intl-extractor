@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-react-intl-extractor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESLint plugin for detecting duplicates and extracting messageIds and defaultMessages from React Intl tags.",
   "repository": {
     "type": "git",
